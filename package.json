@@ -1,0 +1,33 @@
+{
+  "name": "dusty-avatars",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx eslint src",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "npx prettier src --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint:fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SE-Designs/dusty-avatars.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SE-Designs/dusty-avatars/issues"
+  },
+  "homepage": "https://github.com/SE-Designs/dusty-avatars#readme",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "@eslint/json": "^0.12.0",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.5",
+    "globals": "^16.1.0",
+    "prettier": "3.5.3",
+    "prettier-eslint": "^16.4.2",
+    "typescript-eslint": "^8.32.1"
+  }
+}
