@@ -2,7 +2,7 @@ import { stringToHash } from "../../../helpers/index";
 import { getRandomColor } from "../../../core/index";
 
 /**
- * Генерирует аватар с мягкими градиентными пятнами как на Dribbble
+ * Генерирует аватар с мягкими пятнами-градиентами без фонового цвета
  * @param name - строка для сидирования
  * @param size - размер аватара в пикселях
  * @param colors - массив из 3-5 цветов (если не переданы — сгенерируем)
@@ -14,7 +14,7 @@ export function gradient(
   colors?: string[],
 ): string {
   const hash = Math.abs(stringToHash(name));
-  const blobCount = 4;
+  const blobCount = 5;
 
   // Если colors не переданы — генерируем нужное количество цветов
   const finalColors: string[] =
@@ -27,28 +27,27 @@ export function gradient(
   // Генерация кругов
   const blobs = finalColors
     .map((color, i) => {
-      const cx = 30 + ((hash * (i + 5)) % 40); // от 30 до 70%
-      const cy = 30 + ((hash * (i + 7)) % 40);
-      const r = 30 + ((hash * (i + 11)) % 20); // радиус от 30 до 50
+      const cx = 10 + ((hash * (i + 5)) % 80); // от 10 до 90%
+      const cy = 10 + ((hash * (i + 7)) % 80);
+      const r = 25 + ((hash * (i + 11)) % 35); // радиус от 25 до 60
+      const opacity = 0.6 + ((hash * (i + 13)) % 30) / 100; // от 0.6 до 0.9
       return `
-        <circle cx="${cx}%" cy="${cy}%" r="${r}%" fill="${color}" fill-opacity="0.9" />
+        <circle cx="${cx}%" cy="${cy}%" r="${r}%" fill="${color}" fill-opacity="${opacity}" />
       `;
     })
     .join("");
 
-  // Финальный SVG
+  // Финальный SVG без фонового прямоугольника
   return `
     <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <filter id="blur-${hash}" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="${size / 8}" result="blur" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="${size / 5}" result="blur" />
         </filter>
       </defs>
-      <rect width="${size}" height="${size}" rx="${size / 2}" fill="#fff"/>
       <g filter="url(#blur-${hash})">
         ${blobs}
       </g>
-      <rect width="${size}" height="${size}" rx="${size / 2}" fill="transparent" stroke="none"/>
     </svg>
   `;
 }
