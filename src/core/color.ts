@@ -20,7 +20,13 @@ export function getRandomColorFromPalette(
 }
 
 export function getRandomColorFromSchemes(name: string): string[] {
-  const hash = stringToHash(name);
+  if (!colorSchemes.length) {
+    throw new Error("No color schemes available");
+  }
+
+  const hash = Math.abs(stringToHash(name));
   const paletteIndex = hash % colorSchemes.length;
-  return colorSchemes[paletteIndex] as string[];
+  const palette = colorSchemes[paletteIndex] as string[];
+
+  return palette;
 }
