@@ -1,6 +1,7 @@
 import { gradient } from "./styles/gradient";
 import { pinxels } from "./styles/pinxels";
 import { pixels } from "./styles/pixels";
+import { smooth } from "./styles/smooth";
 
 type AvatarGenerator = (name: string, size: number, colors: string[]) => string;
 
@@ -15,5 +16,6 @@ type AvatarGenerator = (name: string, size: number, colors: string[]) => string;
 export const avatarStyles: Record<string, AvatarGenerator> = {
   gradient: gradient,
   pixels: pixels,
+  smooth: smooth,
   pinxels: pinxels,
 };
